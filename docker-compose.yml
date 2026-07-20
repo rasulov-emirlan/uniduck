@@ -1,0 +1,16 @@
+services:
+  uniduck:
+    image: nginx:alpine
+    restart: unless-stopped
+    volumes:
+      - ./:/usr/share/nginx/html:ro
+    networks: [web]
+    labels:
+      - traefik.enable=true
+      - "traefik.http.routers.uniduck.rule=Host(`uniduck.night.enkiduck.com`)"
+      - traefik.http.routers.uniduck.entrypoints=websecure
+      - traefik.http.routers.uniduck.tls.certresolver=le
+      - traefik.http.services.uniduck.loadbalancer.server.port=80
+networks:
+  web:
+    external: true

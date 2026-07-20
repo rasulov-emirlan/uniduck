@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>UNIDUCK — a toilet's journey home</title>
+<meta property="og:title" content="UNIDUCK">
+<meta property="og:description" content="A duck stuck in a toilet fights its way home. Area 1: The Dumpster.">
+<meta property="og:image" content="assets/title.png">
+<link rel="icon" href="assets/title.png">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%; height: 100%;
+    background: #0d1117;
+    overflow: hidden;
+    touch-action: none;
+    overscroll-behavior: none;
+    font-family: monospace;
+  }
+  #wrap {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  canvas#game {
+    width: 100vw; height: 56.25vw;
+    max-height: 100vh; max-width: 177.78vh;
+    image-rendering: pixelated;
+    background: #0d1117;
+  }
+  #touchui { display: none; }
+  #touchui.on { display: block; }
+  #joyzone {
+    position: fixed; left: 0; bottom: 0;
+    width: 45vw; height: 60vh; z-index: 5;
+  }
+  #joybase, #joyknob {
+    position: fixed; display: none; z-index: 6; pointer-events: none;
+    border-radius: 50%;
+  }
+  #joybase { width: 110px; height: 110px; border: 2px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); }
+  #joyknob { width: 50px; height: 50px; background: rgba(255,210,63,0.5); }
+  .btn {
+    position: fixed; z-index: 6;
+    width: 66px; height: 66px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.85);
+    font-family: monospace; font-weight: bold; font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    user-select: none; -webkit-user-select: none;
+  }
+  .btn.pressed { background: rgba(255,210,63,0.35); border-color: #ffd23f; }
+  #btn-atk  { right: 18px;  bottom: 78px; width: 78px; height: 78px; border-color: rgba(230,57,70,0.7); }
+  #btn-dash { right: 104px; bottom: 26px; border-color: rgba(159,216,239,0.7); }
+  #btn-quack{ right: 116px; bottom: 118px; }
+  #btn-e    { right: 24px;  bottom: 170px; width: 56px; height: 56px; border-color: rgba(255,210,63,0.7); }
+</style>
+</head>
+<body>
+<div id="wrap"><canvas id="game" width="960" height="540"></canvas></div>
+<div id="touchui">
+  <div id="joyzone"></div>
+  <div id="joybase"></div>
+  <div id="joyknob"></div>
+  <div class="btn" id="btn-atk">PLNGR</div>
+  <div class="btn" id="btn-dash">DASH</div>
+  <div class="btn" id="btn-quack">QUACK</div>
+  <div class="btn" id="btn-e">E</div>
+</div>
+<script src="js/sprites.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
