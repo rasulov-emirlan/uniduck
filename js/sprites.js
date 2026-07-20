@@ -362,6 +362,114 @@ const HEART_EMPTY = [
   '...s...',
 ];
 
+const TRASHBAG = [
+  '......ss......',
+  '.....sSs......',
+  '....sSSSss....',
+  '...SSSsSSSs...',
+  '..SSSSSSsSSs..',
+  '..SsSSSSSSSS..',
+  '.SSSSSsSSSSSs.',
+  '.SSsSSSSSSsSs.',
+  '.SSSSSSsSSSSs.',
+  '.sSSsSSSSSSss.',
+  '..ssssssssss..',
+  '....L.....L...',
+];
+
+const TRASHPILE = [
+  '..........sss.............',
+  '....sss..sSSSs......nnn...',
+  '...sSSSssSSSSSs....nNNNn..',
+  '..sSKKKSsSsSSSs...nNNNNNn.',
+  '..sSKCKSsSSSsSs...nNnNnNn.',
+  '..sSKKKSssSSSss...nNNNNNn.',
+  '..ssSSSss.sss.....nNnNnNn.',
+  '...sssss..........nnnnnnn.',
+  '.....ssssss....GG.........',
+  '....ssKKKKss..GgG..YY.....',
+  '...ssKKssKKss.GgG.YyY.....',
+  '...sKKs..sKKs.GG..Yy......',
+  '...sKKssssKKs.....y.......',
+  '....sKKKKKKs..vv..........',
+  '.....ssssss..vEv..........',
+  '..............vv..........',
+];
+
+const LAMPPOST = [
+  '...ssssssss...',
+  '...ss....ss...',
+  '...ss...sOOOs.',
+  '...ss...sOhOs.',
+  '...ss...sOOOs.',
+  '...ss....sss..',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '...ss.........',
+  '..ssss........',
+  '.ssssss.......',
+];
+
+const THRONE = [
+  '....................T.T.T...............',
+  '....................TTTTT...............',
+  '.................RRRRRRRRRRR............',
+  '................RRrRRRRRRRrRR...........',
+  '................RRRRRRRRRRRRR...........',
+  '................RRrRRRRRRRrRR...........',
+  '................RRRRRRRRRRRRR...........',
+  '................RRrRRRRRRRrRR...........',
+  '...............rRRRRRRRRRRRRRr..........',
+  '..............rrRRRRRRRRRRRRRrr.........',
+  '..............rrRRRrrrrrrrRRRrr.........',
+  '.....vvvv.....rrRRrrrrrrrrrRRrr.........',
+  '....vWWWWv....rrRRrrrrrrrrrRRrr.........',
+  '...vWEWWWWv...rrrrrrrrrrrrrrrrr..gg.....',
+  '..vWEWvvWWWv..srrrrrrrrrrrrrrrsssGGs....',
+  '..vWWvGGvWWv.ssSSSSssSSSSsSSSSssGgGs....',
+  '..vWWvGGvWWvsSSSsSSSSsSSSSSsSSSssGss....',
+  '..vWWWvvWWWvsSsSSSSsSSSSSsSSSSSSsss.....',
+  '...vWWWWWWvsSSSSsSSSSSSSSSSsSSSSSSs.....',
+  '....vvvvvvsSSsSSSSSsGGgSSSSSSsSSSSss....',
+  '....sSSssSSSSSSSsSSSGgGSSsSSSSSSSSSSs...',
+  '...sSSSSSSsSSSSSSSSSSGSSSSSSsSSSSSSSs...',
+  '..sSSsSSSSSSSsSSSSSSSSSSSsSSSSSSsSSSSs..',
+  '..sSSSSSsSSSSSSSSsSSSSSSSSSSsSSSSSSSSs..',
+  '.ssssssssssssssssssssssssssssssssssssss.',
+];
+
+const GRATE = [
+  '......vvvvvvvvvvvv......',
+  '....vvGGGGGGGGGGGGvv....',
+  '..vvGGssssssssssssGGvv..',
+  '.vGGssLssLssLssLssssGv..',
+  '.vGssSSLSSLSSLSSLSssGv..',
+  'vGGsSSSLSSLSSLSSLSSsGGv.',
+  'vGsSSSSLSSLSSLSSLSSSsGv.',
+  'vGsSSSSLSSLSSLSSLSSSsGv.',
+  'vGGsSSSLSSLSSLSSLSSsGGv.',
+  '.vGssSSLSSLSSLSSLSssGv..',
+  '.vGGssLssLssLssLssssGv..',
+  '..vvGGssssssssssssGGvv..',
+  '....vvGGGGGGGGGGGGvv....',
+  '......vvvvvvvvvvvv......',
+];
+
 const SPRITES = {};
 function buildSprites() {
   const duckFrames = (body) => ({
@@ -401,4 +509,9 @@ function buildSprites() {
   SPRITES.quack = makeSprite(QUACK, 2);
   SPRITES.heart = makeSprite(HEART, 3);
   SPRITES.heartEmpty = makeSprite(HEART_EMPTY, 3);
+  SPRITES.trashbag = makeSprite(TRASHBAG, 3);
+  SPRITES.trashpile = makeSprite(TRASHPILE, 3);
+  SPRITES.lamppost = makeSprite(LAMPPOST, 3);
+  SPRITES.throne = makeSprite(THRONE, 4);
+  SPRITES.grate = makeSprite(GRATE, 4);
 }

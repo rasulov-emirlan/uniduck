@@ -1140,7 +1140,10 @@ function draw() {
 
   // grate prop + glow
   const grateCx = 45 * T, grateCy = 2 * T + T / 2;
-  drawProp('grate', grateCx, grateCy + T / 2 + 6, null);
+  drawProp('grate', grateCx, grateCy + T / 2 + 6, () => {
+    const s = SPRITES.grate;
+    ctx.drawImage(s, grateCx - s.width / 2, grateCy - s.height / 2);
+  });
   if (save.bossDead) {
     const g = Math.sin(playT * 3) * 0.12 + 0.3;
     ctx.fillStyle = `rgba(122,199,79,${g})`;
@@ -1338,39 +1341,16 @@ function drawDumpsterFallback(d) {
   ctx.fillStyle = '#48905a'; ctx.fillRect(px + 4, py + 6, w - 8, 16);
 }
 function drawPileFallback(p) {
-  const px = p.x * T, py = p.y * T;
-  ctx.fillStyle = '#4b5157'; ctx.fillRect(px + 8, py + 10, 14, 16);
-  ctx.fillStyle = '#3e444a'; ctx.fillRect(px + 20, py + 16, 16, 18);
-  ctx.fillStyle = '#5a4632'; ctx.fillRect(px + 14, py + 24, 20, 10);
+  const s = SPRITES.trashpile;
+  ctx.drawImage(s, (p.x + 0.5) * T - s.width / 2, (p.y + 1) * T + 2 - s.height);
 }
 function drawThroneFallback() {
-  const cx = 41 * T, by = 5.4 * T;
-  ctx.fillStyle = '#2c3033';
-  ctx.beginPath(); ctx.ellipse(cx, by - 8, 88, 30, 0, 0, 7); ctx.fill();
-  ctx.fillStyle = '#3a3f44';
-  ctx.beginPath(); ctx.ellipse(cx - 30, by - 34, 44, 28, 0, 0, 7); ctx.fill();
-  ctx.beginPath(); ctx.ellipse(cx + 36, by - 28, 40, 26, 0, 0, 7); ctx.fill();
-  ctx.fillStyle = '#4b5157';
-  ctx.beginPath(); ctx.ellipse(cx, by - 52, 46, 24, 0, 0, 7); ctx.fill();
-  ctx.fillStyle = '#6d3a2a';
-  ctx.fillRect(cx - 26, by - 96, 52, 46);
-  ctx.fillStyle = '#84483a';
-  ctx.fillRect(cx - 26, by - 96, 52, 12);
-  ctx.fillRect(cx - 32, by - 70, 8, 26); ctx.fillRect(cx + 24, by - 70, 8, 26);
-  ctx.fillStyle = '#c9b458';
-  ctx.fillRect(cx - 12, by - 108, 24, 8);
-  ctx.fillRect(cx - 12, by - 116, 5, 8); ctx.fillRect(cx - 2, by - 118, 5, 10); ctx.fillRect(cx + 8, by - 116, 5, 8);
+  const s = SPRITES.throne;
+  ctx.drawImage(s, 41 * T - s.width / 2, 5.4 * T - s.height);
 }
 function drawLamp(l) {
-  if (PROPS.lamppost) {
-    ctx.drawImage(PROPS.lamppost, l.x - PROPS.lamppost.width / 2, l.y - PROPS.lamppost.height);
-  } else {
-    ctx.fillStyle = '#2c3033';
-    ctx.fillRect(l.x - 4, l.y - 110, 8, 110);
-    ctx.fillRect(l.x - 14, l.y - 116, 28, 10);
-    ctx.fillStyle = '#ffb450';
-    ctx.fillRect(l.x - 8, l.y - 114, 16, 7);
-  }
+  const s = PROPS.lamppost || SPRITES.lamppost;
+  ctx.drawImage(s, l.x - s.width / 2, l.y - s.height);
 }
 
 function drawPlayer() {
@@ -1460,14 +1440,8 @@ function drawHpPip(e) {
 }
 
 function drawBag(bg) {
-  if (PROPS.trashbag) {
-    ctx.drawImage(PROPS.trashbag, bg.x - PROPS.trashbag.width / 2, bg.y - PROPS.trashbag.height + 8);
-  } else {
-    ctx.fillStyle = '#2c3033';
-    ctx.beginPath(); ctx.ellipse(bg.x, bg.y, 16, 12, 0, 0, 7); ctx.fill();
-    ctx.fillStyle = '#3a3f44';
-    ctx.beginPath(); ctx.ellipse(bg.x - 3, bg.y - 4, 10, 8, 0, 0, 7); ctx.fill();
-  }
+  const s = PROPS.trashbag || SPRITES.trashbag;
+  ctx.drawImage(s, bg.x - s.width / 2, bg.y - s.height + 8);
   if (bg.idx === SANDWICH_BAG && save.quest === 1 && !save.hasSandwich) {
     ctx.globalAlpha = 0.5 + 0.4 * Math.sin(playT * 5);
     ctx.fillStyle = '#ffd23f';
@@ -1763,7 +1737,7 @@ function drawShop() {
 
 function drawCutscene() {
   const panel = CUTSCENE[cut.i];
-  const img = PROPS[panel.img];
+  const img = PROPS[panel.img] || CUT_FB[panel.img];
   ctx.fillStyle = '#05070c';
   ctx.fillRect(0, 0, VIEW_W, VIEW_H);
   if (img && img.width) {
@@ -1952,6 +1926,7 @@ function init() {
   camY = Math.max(0, Math.min(MAP_H * T - VIEW_H, player.y - VIEW_H / 2));
   titleImg = new Image();
   titleImg.src = 'assets/title.png';
+  buildCutsceneFallbacks(titleImg);
 
   let last = performance.now();
   function frame(now) {
